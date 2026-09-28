@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Idiot ❤️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Trebuchet MS", sans-serif;
+  background: linear-gradient(135deg, #160018, #3b092f, #160018);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+section {
+  min-height: 100vh;
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 8vw, 4.5rem);
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+p {
+  line-height: 1.7;
+}
+
+/* Floating hearts */
+
+.heart {
+  position: fixed;
+  bottom: -20px;
+  animation: float 7s linear infinite;
+  opacity: .7;
+  pointer-events: none;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0) rotate(0);
+  }
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+  }
+}
+
+/* Countdown */
+
+.countdown {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 25px 0;
+}
+
+.timebox {
+  background: rgba(255,255,255,.1);
+  backdrop-filter: blur(10px);
+  padding: 18px;
+  border-radius: 18px;
+  min-width: 75px;
+  border: 1px solid rgba(255,255,255,.2);
+}
+
+.timebox span {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+button {
+  border: none;
+  padding: 14px 25px;
+  border-radius: 30px;
+  background: #ff4f9a;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px;
+  transition: .3s;
+}
+
+button:hover {
+  transform: scale(1.08);
+  background: #ff78b2;
+}
+
+/* Photos */
+
+.photos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  max-width: 600px;
+  width: 100%;
+  margin: 25px auto;
+}
+
+.photos img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+}
+
+/* Balloons */
+
+.balloons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+
+.balloon {
+  width: 90px;
+  height: 110px;
+  background: #ff4f9a;
+  border-radius: 50% 50% 45% 45%;
+  cursor: pointer;
+  position: relative;
+  animation: bob 2s infinite ease-in-out;
+  box-shadow: 0 8px 20px rgba(255,0,120,.3);
+}
+
+.balloon::after {
+  content: "";
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  width: 2px;
+  height: 35px;
+  background: white;
+}
+
+.balloon:nth-child(2) {
+  background: #8e5cff;
+  animation-delay: .3s;
+}
+
+.balloon:nth-child(3) {
+  background: #ff779d;
+  animation-delay: .6s;
+}
+
+.balloon:nth-child(4) {
+  background: #7d7aff;
+  animation-delay: .9s;
+}
+
+@keyframes bob {
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.popped {
+  animation: pop .3s forwards !important;
+}
+
+@keyframes pop {
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* Message */
+
+.message {
+  max-width: 650px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  padding: 30px;
+  border-radius: 25px;
+  backdrop-filter: blur(12px);
+  margin: 20px;
+}
+
+/* Cake */
+
+.cake {
+  font-size: 100px;
+  margin: 20px;
+  transition: .5s;
+}
+
+.flame {
+  display: inline-block;
+  animation: flame 1s infinite alternate;
+}
+
+@keyframes flame {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
+}
+
+/* Yes / No */
+
+.question {
+  font-size: 1.7rem;
+  margin: 25px;
+}
+
+#noBtn {
+  background: #555;
+  position: relative;
+}
+
+/* Final */
+
+.final {
+  font-size: 1.3rem;
+  max-width: 700px;
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -20px;
+  animation: fall 4s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+  }
+}
+
+.small {
+  opacity: .7;
+  font-size: .9rem;
+  margin-top: 15px;
+}
+
+@media(max-width:600px) {
+  .photos img {
+    height: 170px;
+  }
+
+  .balloon {
+    width: 70px;
+    height: 90px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="music" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- INTRO -->
+<section id="intro">
+
+  <p>✨ A little surprise is waiting for you...</p>
+
+  <h1>Hey, Birthday Idiot! ❤️</h1>
+
+  <p>
+    Someone very far away has prepared something for you...
+  </p>
+
+  <div class="countdown">
+
+    <div class="timebox">
+      <span id="days">00</span>
+      Days
+    </div>
+
+    <div class="timebox">
+      <span id="hours">00</span>
+      Hours
+    </div>
+
+    <div class="timebox">
+      <span id="minutes">00</span>
+      Minutes
+    </div>
+
+    <div class="timebox">
+      <span id="seconds">00</span>
+      Seconds
+    </div>
+
+  </div>
+
+  <button onclick="startSurprise()">
+    Open Your Surprise 💌
+  </button>
+
+  <p class="small">
+    Make sure your volume is on 🎵
+  </p>
+
+</section>
+
+
+<!-- PHOTOS -->
+<section id="photosSection" class="hidden">
+
+  <h2>Four little pieces of us ❤️</h2>
+
+  <div class="photos">
+
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+    <img src="photo4.jpg">
+
+  </div>
+
+  <div class="message">
+
+    <p>
+      Distance may put miles between two people,
+      but somehow it never manages to make the
+      special moments feel less special. ✨
+    </p>
+
+    <br>
+
+    <p>
+      And today is about celebrating YOU. ❤️
+    </p>
+
+  </div>
+
+  <button onclick="showBalloons()">
+    There's more... 🎈
+  </button>
+
+</section>
+
+
+<!-- BALLOONS -->
+<section id="balloonSection" class="hidden">
+
+  <h2>Pop the balloons 🎈</h2>
+
+  <p>Each balloon has a little message for you.</p>
+
+  <div class="balloons">
+
+    <div class="balloon" onclick="popBalloon(this, 0)"></div>
+    <div class="balloon" onclick="popBalloon(this, 1)"></div>
+    <div class="balloon" onclick="popBalloon(this, 2)"></div>
+    <div class="balloon" onclick="popBalloon(this, 3)"></div>
+
+  </div>
+
+  <div id="balloonMessage" class="message">
+    🎈 Choose a balloon...
+  </div>
+
+  <button id="continueBtn" class="hidden" onclick="showCake()">
+    One last surprise 🎂
+  </button>
+
+</section>
+
+
+<!-- CAKE -->
+<section id="cakeSection" class="hidden">
+
+  <h2>Okay birthday idiot...</h2>
+
+  <p>Make a wish. ✨</p>
+
+  <div class="cake" id="cake">
+    🎂<span class="flame">🔥</span>
+  </div>
+
+  <button onclick="blowCandle()">
+    Blow the candle 🕯️
+  </button>
+
+  <p id="cakeMessage"></p>
+
+</section>
+
+
+<!-- QUESTION -->
+<section id="questionSection" class="hidden">
+
+  <h2>Before the final surprise...</h2>
+
+  <div class="question">
+    Will you keep choosing this crazy long-distance journey with me? ❤️
+  </div>
+
+  <button onclick="yesAnswer()">YES ❤️</button>
+
+  <button id="noBtn" onclick="moveNo()">NO 🙈</button>
+
+  <p id="answer"></p>
+
+</section>
+
+
+<!-- FINAL -->
+<section id="finalSection" class="hidden">
+
+  <h1>Happy Birthday ❤️</h1>
+
+  <div class="message final">
+
+    <p>
+      Happy Birthday to my favourite idiot. 🥹❤️
+    </p>
+
+    <br>
+
+    <p>
+      I wish I could be there beside you today,
+      celebrating, laughing and annoying you in person.
+      Until that day comes, consider this little website
+      my tiny piece of love from far away.
+    </p>
+
+    <br>
+
+    <p>
+      No matter how many kilometres are between us,
+      today is still your day — and I hope it brings
+      you a thousand reasons to smile.
+    </p>
+
+    <br>
+
+    <p>
+      Keep smiling, keep dreaming and keep being
+      wonderfully YOU. ✨
+    </p>
+
+    <br>
+
+    <h2>Happy Birthday, idiot. 🎂❤️</h2>
+
+    <p>
+      Distance is temporary. The memories aren't. 🌙
+    </p>
+
+  </div>
+
+</section>
+
+
+<script>
+
+/* COUNTDOWN */
+
+function updateCountdown() {
+
+  const now = new Date();
+
+  let birthday = new Date(
+    now.getFullYear(),
+    8,
+    29,
+    0,
+    0,
+    0
+  );
+
+  if (now > birthday) {
+    birthday.setFullYear(now.getFullYear() + 1);
+  }
+
+  const difference = birthday - now;
+
+  const days = Math.floor(difference / (1000*60*60*24));
+  const hours = Math.floor(
+    difference / (1000*60*60) % 24
+  );
+  const minutes = Math.floor(
+    difference / (1000*60) % 60
+  );
+  const seconds = Math.floor(
+    difference / 1000 % 60
+  );
+
+  document.getElementById("days").innerText =
+    String(days).padStart(2,"0");
+
+  document.getElementById("hours").innerText =
+    String(hours).padStart(2,"0");
+
+  document.getElementById("minutes").innerText =
+    String(minutes).padStart(2,"0");
+
+  document.getElementById("seconds").innerText =
+    String(seconds).padStart(2,"0");
+}
+
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+
+/* START */
+
+function startSurprise() {
+
+  document.getElementById("music").play().catch(()=>{});
+
+  document.getElementById("intro")
+    .classList.add("hidden");
+
+  document.getElementById("photosSection")
+    .classList.remove("hidden");
+
+  window.scrollTo(0,0);
+}
+
+
+/* PHOTOS → BALLOONS */
+
+function showBalloons() {
+
+  document.getElementById("photosSection")
+    .classList.add("hidden");
+
+  document.getElementById("balloonSection")
+    .classList.remove("hidden");
+
+  window.scrollTo(0,0);
+}
+
+
+/* BALLOONS */
+
+const wishes = [
+
+  "You're officially one year older... but still my favourite idiot. 😂❤️",
+
+  "If distance had a face, I'd probably block it. 😭❤️",
+
+  "I hope this year gives you everything you've been wishing for. ✨",
+
+  "And here's one promise: no matter how far, your birthday will never feel ordinary. ❤️"
+
+];
+
+let popped = 0;
+
+function popBalloon(balloon,index) {
+
+  if(balloon.classList.contains("popped")) return;
+
+  balloon.classList.add("popped");
+
+  document.getElementById("balloonMessage")
+    .innerText = wishes[index];
+
+  popped++;
+
+  if(popped === 4) {
+
+    setTimeout(() => {
+
+      document.getElementById("continueBtn")
+        .classList.remove("hidden");
+
+    },500);
+
+  }
+}
+
+
+/* CAKE */
+
+function showCake() {
+
+  document.getElementById("balloonSection")
+    .classList.add("hidden");
+
+  document.getElementById("cakeSection")
+    .classList.remove("hidden");
+
+  window.scrollTo(0,0);
+}
+
+function blowCandle() {
+
+  document.querySelector(".flame")
+    .style.display = "none";
+
+  document.getElementById("cakeMessage")
+    .innerText =
+    "Wish made! ✨ Now let's see what's next... ❤️";
+
+  setTimeout(() => {
+
+    document.getElementById("cakeSection")
+      .classList.add("hidden");
+
+    document.getElementById("questionSection")
+      .classList.remove("hidden");
+
+  },2500);
+}
+
+
+/* YES */
+
+function yesAnswer() {
+
+  document.getElementById("answer")
+    .innerText =
+    "I knew you'd choose YES. ❤️✨";
+
+  setTimeout(() => {
+
+    document.getElementById("questionSection")
+      .classList.add("hidden");
+
+    document.getElementById("finalSection")
+      .classList.remove("hidden");
+
+    createConfetti();
+
+  },1800);
+}
+
+
+/* NO BUTTON */
+
+function moveNo() {
+
+  const button = document.getElementById("noBtn");
+
+  button.style.position = "absolute";
+
+  button.style.left =
+    Math.random()*70 + "%";
+
+  button.style.top =
+    Math.random()*70 + "%";
+}
+
+
+/* CONFETTI */
+
+function createConfetti() {
+
+  for(let i=0;i<100;i++) {
+
+    const c = document.createElement("div");
+
+    c.className = "confetti";
+
+    c.style.left =
+      Math.random()*100 + "vw";
+
+    c.style.animationDelay =
+      Math.random()*2 + "s";
+
+    c.innerHTML = "❤️";
+
+    document.body.appendChild(c);
+
+    setTimeout(() => c.remove(),5000);
+  }
+}
+
+
+/* FLOATING HEARTS */
+
+setInterval(() => {
+
+  const heart = document.createElement("div");
+
+  heart.className = "heart";
+
+  heart.innerHTML =
+    ["❤️","💕","✨","💗"][Math.floor(Math.random()*4)];
+
+  heart.style.left =
+    Math.random()*100 + "vw";
+
+  heart.style.fontSize =
+    (15 + Math.random()*25) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(),7000);
+
+},700);
+
+</script>
+
+</body>
+</html>
